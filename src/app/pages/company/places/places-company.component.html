@@ -1,0 +1,209 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+        <div class="card">
+            <form
+                [formGroup]="createForm"
+                #form="ngForm"
+                (ngSubmit)="onSubmit()"
+            >
+                <h5>Add place</h5>
+                <div class="formgroup-inline">
+                    <div class="field">
+                        <app-default-autocomplete
+                            id="address1"
+                            type="text"
+                            controlName="address"
+                            [defaultAutocompleteForm]="createForm"
+                        >
+                        </app-default-autocomplete>
+                    </div>
+                    <div class="field">
+                        <input
+                            pInputText
+                            id="name1"
+                            type="text"
+                            placeholder="Name"
+                            formControlName="name"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field">
+                        <input
+                            pInputText
+                            id="description1"
+                            type="text"
+                            placeholder="Description"
+                            formControlName="description"
+                            ngModel
+                        />
+                    </div>
+                    <button pButton label="Submit"></button>
+                </div>
+            </form>
+        </div>
+        <div class="card" *ngIf="this.places?.length > 0">
+            <h5>List places</h5>
+            <p-toast></p-toast>
+            <p-table
+                [value]="places"
+                dataKey="name"
+                [expandedRowKeys]="expandedRows"
+                responsiveLayout="scroll"
+            >
+                <ng-template pTemplate="caption">
+                    <button
+                        pButton
+                        icon="pi pi-fw {{
+                            isExpanded ? 'pi-minus' : 'pi-plus'
+                        }}"
+                        label="{{ isExpanded ? 'Chiudi Tutto' : 'Espandi Tutto' }}"
+                        (click)="expandAll()"
+                    ></button>
+                    <div class="flex table-header"></div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+                        <th pSortableColumn="name">
+                            Name <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="address">
+                            Address <p-sortIcon field="address"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="latitude">
+                            Latitude <p-sortIcon field="latitude"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="longitude">
+                            Longitude
+                            <p-sortIcon field="longitude"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="description">
+                            Description
+                            <p-sortIcon field="description"></p-sortIcon>
+                        </th>
+                        <th>Map</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-place let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button
+                                type="button"
+                                pButton
+                                pRipple
+                                [pRowToggler]="place"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="
+                                    expanded
+                                        ? 'pi pi-chevron-down'
+                                        : 'pi pi-chevron-right'
+                                "
+                            ></button>
+                        </td>
+                        <td style="min-width: 12rem">{{ place.name }}</td>
+                        <td style="min-width: 12rem">{{ place.address }}</td>
+                        <td style="min-width: 12rem">{{ place.latitude }}</td>
+                        <td style="min-width: 12rem">{{ place.longitude }}</td>
+                        <td style="min-width: 10rem">
+                            {{ place.description }}
+                        </td>
+                        <td style="min-width: 10rem"></td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-place>
+                    <tr>
+                        <td colspan="7">
+                            <div class="p-3">
+                                <p-table
+                                    [value]="place.attendaces"
+                                    dataKey="id"
+                                    responsiveLayout="scroll"
+                                >
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th pSortableColumn="id">
+                                                Id
+                                                <p-sortIcon
+                                                    field="price"
+                                                ></p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="customer">
+                                                Customer
+                                                <p-sortIcon
+                                                    field="customer"
+                                                ></p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="date">
+                                                Date
+                                                <p-sortIcon
+                                                    field="date"
+                                                ></p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="amount">
+                                                Amount
+                                                <p-sortIcon
+                                                    field="amount"
+                                                ></p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="stats">
+                                                Status
+                                                <p-sortIcon
+                                                    field="status"
+                                                ></p-sortIcon>
+                                            </th>
+                                            <th style="width: 4rem"></th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template
+                                        pTemplate="body"
+                                        let-attendance
+                                    >
+                                        <tr>
+                                            <td>{{ attendance.id }}</td>
+                                            <td>{{ attendance.customer }}</td>
+                                            <td>{{ attendance.date }}</td>
+                                            <td>
+                                                {{
+                                                    attendance.amount
+                                                        | currency : "USD"
+                                                }}
+                                            </td>
+                                            <td>
+                                                <span
+                                                    [class]="
+                                                        'order-badge order-' +
+                                                        attendance.status
+                                                    "
+                                                    >{{
+                                                        attendance.status
+                                                    }}</span
+                                                >
+                                            </td>
+                                            <td>
+                                                <p-button
+                                                    type="button"
+                                                    icon="pi pi-search"
+                                                ></p-button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                            <td colspan="6">
+                                                There are no order for this
+                                                product yet.
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="card" *ngIf="hasPlaces$$ | async as placesData">
+            <app-google-maps [places]="placesData"></app-google-maps>
+        </div>
+    </div>
+</div>

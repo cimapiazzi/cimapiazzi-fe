@@ -1,0 +1,160 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Avvisa malattia</h5>
+            <form [formGroup]="medicalForm" #form="ngForm">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="dates1"
+                            >Seleziona periodo o data malattia</label
+                        >
+                        <p-calendar
+                            formControlName="dates"
+                            selectionMode="multiple"
+                            placeholder="Seleziona date"
+                            [minDate]="minimumDate"
+                        ></p-calendar>
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="dates1">Note</label>
+                        <textarea
+                            rows="5"
+                            cols="30"
+                            placeholder="Eventuali note"
+                            ngModel
+                            formControlName="note"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                    <div class="field col-12 md:col-6" style="display: none">
+                        <label htmlFor="typology1">Tipologia permesso</label>
+                        <input
+                            pInputText
+                            id="typology1"
+                            type="text"
+                            formControlName="typology"
+                        />
+                    </div>
+                </div>
+
+                <button
+                    pButton
+                    pRipple
+                    label="Manda avviso"
+                    class="w-full p-3 text-xl"
+                    (click)="savePermission()"
+                    [disabled]="!medicalForm.valid"
+                ></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card p-fluid">
+            <form [formGroup]="myMedicalsForm" #form="ngForm">
+                <h5>Seleziona mese e anno</h5>
+                <div class="p-formgrid grid">
+                    <div class="field col">
+                        <label htmlFor="year1">Anno</label>
+                        <input
+                            pInputText
+                            id="year1"
+                            type="text"
+                            formControlName="currentYear"
+                        />
+                    </div>
+                    <div class="field col">
+                        <label htmlFor="month1">Mese</label>
+                        <p-dropdown
+                            [options]="monthsItems"
+                            optionLabel="name"
+                            formControlName="currentMonth"
+                            [(ngModel)]="selectedCurrentMonth"
+                            (onChange)="onChangeMonth($event)"
+                        ></p-dropdown>
+                    </div>
+                </div>
+            </form>
+
+            <div class="list-permission" *ngIf="permissions">
+                <div class="item" *ngFor="let permission of permissions">
+                    <div
+                        class="fields"
+                        [ngClass]="{
+                            approved: permission?.status === 'Approvato',
+                            waiting: permission?.status === 'In Attesa',
+                            rejected: permission?.status === 'Negato',
+                            medical: permission?.typology === 'Malattia'
+                        }"
+                    >
+                        <div class="icon">
+                            <div [ngSwitch]="permission?.typology">
+                                <span *ngSwitchCase="'Malattia'">
+                                    <img
+                                        src="assets/icons/flu.png"
+                                        class="w-3rem h-3rem"
+                                        alt="Malattia"
+                                    />
+                                </span>
+                                <span *ngSwitchCase="'Ferie'">
+                                    <img
+                                        src="assets/icons/holiday.png"
+                                        class="w-3rem h-3rem"
+                                        alt="Ferie"
+                                    />
+                                </span>
+                                <span *ngSwitchCase="'Permesso ROL'">
+                                    <img
+                                        src="assets/icons/permit.png"
+                                        class="w-3rem h-3rem"
+                                        alt="Ferie"
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="status">
+                            <span
+                                [ngClass]="{
+                                    approved:
+                                        permission?.status === 'Approvato',
+                                    waiting: permission?.status === 'In Attesa',
+                                    rejected: permission?.status === 'Negato'
+                                }"
+                                >{{ permission?.status }}</span
+                            >
+                        </div>
+                        <div class="typology">
+                            {{ permission?.typology }}
+                            <div *ngIf="permission?.protocolNumber">
+                                N° <strong>{{ permission?.protocolNumber }}</strong>
+                            </div>
+                        </div>
+                        <div class="dates">
+                            <div class="days">
+                                <span
+                                    class="day"
+                                    *ngFor="let data of permission?.dates"
+                                >
+                                    {{ data }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            pButton
+                            [routerLink]="[permission.id]"
+                            label="Aggiungi N° Protocollo"
+                        ></button>
+                    </div>
+                    <div class="note" *ngIf="permission.note">
+                        <strong>Note: </strong> {{ permission.note }}
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!permissions">Nessuna richiesta trovata</div>
+        </div>
+    </div>
+</div>

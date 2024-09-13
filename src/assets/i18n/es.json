@@ -1,0 +1,173 @@
+{
+    "primeng": {
+        "startsWith": "Starts with",
+        "contains": "Contains",
+        "notContains": "Not contains",
+        "endsWith": "Ends with",
+        "equals": "Equals",
+        "notEquals": "Not equals",
+        "noFilter": "No Filter",
+        "lt": "Less than",
+        "lte": "Less than or equal to",
+        "gt": "Greater than",
+        "gte": "Greater than or equal to",
+        "is": "Is",
+        "isNot": "Is not",
+        "before": "Before",
+        "after": "After",
+        "dateIs": "Date is",
+        "dateIsNot": "Date is not",
+        "dateBefore": "Date is before",
+        "dateAfter": "Date is after",
+        "clear": "Clear",
+        "apply": "Apply",
+        "matchAll": "Match All",
+        "matchAny": "Match Any",
+        "addRule": "Add Rule",
+        "removeRule": "Remove Rule",
+        "accept": "Yes",
+        "reject": "No",
+        "choose": "Seleciona",
+        "upload": "Upload",
+        "cancel": "Cancel",
+        "dayNames": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        "monthNames": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ],
+        "monthNamesShort": [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ],
+        "dateFormat": "mm/dd/yy",
+        "firstDayOfWeek": 0,
+        "today": "Today",
+        "weekHeader": "Wk",
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong",
+        "passwordPrompt": "Enter a password",
+        "emptyMessage": "No results found",
+        "emptyFilterMessage": "No results found"
+    },
+    "menu": {
+        "routes": {
+            "dashboard": {
+                "menuTitle": "Dashboard"
+            },
+            "notification": {
+                "menuTitle": "Notificaciones"
+            },
+            "landing": {
+                "menuTitle": "Landing",
+                "permission": "Permiso",
+                "medical": "Enfermedad",
+                "attendances": "Presencias",
+                "documents": "Documentos"
+            },
+            "attendance": {
+                "menuTitle": "Presencias",
+                "table": "Lista presencias",
+                "users": "Lista presencia usuarios",
+                "create": "Agrega presencia"
+            },
+            "deadlines": {
+                "menuTitle": "Plazos",
+                "table": "Lista plazos"
+            },
+            "workforce": {
+                "menuTitle": "Calendario",
+                "table": "Tabla"
+            },
+            "documents": {
+                "menuTitle": "Documentos",
+                "create": "Agrega documentos"
+            },
+            "permission": {
+                "menuTitle": "Permisos",
+                "table": "Lista permisos"
+            },
+            "user": {
+                "menuTitle": "Usuarios",
+                "table": "Lista usuarios",
+                "create": "Agrega usuario"
+            },
+            "company": {
+                "menuTitle": "Empresas",
+                "table": "Lista empresas",
+                "create": "Agresa empresa"
+            },
+            "vehicle": {
+                "menuTitle": "Veiculos",
+                "table": "Lista veiculos",
+                "create": "Agrega veiculo"
+            }
+        }
+    },
+    "table": {
+        "actions": {
+            "clean": "Limpia",
+            "lock": "Bloquea",
+            "unlock": "Desbloquea",
+            "small": "Pequeño",
+            "normal": "Normal",
+            "Large": "Ancho"
+        },
+        "columns": {
+            "username": "Usuario",
+            "licensePlate": "Placa",
+            "tipology": "Tipologia",
+            "model": "Modelo",
+            "rentalType": "Tipo renta",
+            "driverType": "Tipo conductor",
+            "name": "Nombre",
+            "suranme": "Apellido",
+            "role": "Rol",
+            "company": "Emmpresa",
+            "businessName": "Nombre empresa",
+            "reaNumber": "Numero REA",
+            "vat": "PIVA",
+            "headOffice": "Sitio operativo",
+            "registeredOffice": "Sitio legal",
+            "phone": "Telefono",
+            "email": "Email",
+            "pec": "PEC",
+            "ceo": "Aministrador Delegado",
+            "description": "Descripcion",
+            "status": "Stato",
+            "createdAt": "Fecha creacion",
+            "updatedAt": "Fecha actualizacion",
+            "actions": "Acciones"
+        }
+    }
+}

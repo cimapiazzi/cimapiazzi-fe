@@ -1,0 +1,141 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+        <div class="card">
+            <form [formGroup]="detailForm" #form="ngForm">
+                <h5>Dettaglio azienda</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="name1"> Ragione sociale </label>
+                        <input
+                            id="disabled-input"
+                            type="text"
+                            pInputText
+                            readonly="true"
+                            [attr.disabled]="true"
+                            formControlName="name"
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="vat1">P.IVA</label>
+                        <input
+                            pInputText
+                            id="vat1"
+                            type="text"
+                            formControlName="vat"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="rea_number1">Rea number</label>
+                        <input
+                            pInputText
+                            id="rea_number1"
+                            type="text"
+                            formControlName="reaNumber"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="legal_form1">Forma giuridica</label>
+
+                        <p-dropdown
+                            name="legal_form1"
+                            [options]="legalFormItems"
+                            optionLabel="name"
+                            optionValue="name"
+                            formControlName="legalForm"
+                            [(ngModel)]="selectedLegalForm"
+                        ></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="vat1">Sede legale</label>
+                        <app-default-autocomplete
+                            controlName="registeredOffice"
+                            [defaultAutocompleteForm]="detailForm"
+                        >
+                        </app-default-autocomplete>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="vat1">Sede operativa</label>
+                        <app-default-autocomplete
+                            controlName="headOffice"
+                            [defaultAutocompleteForm]="detailForm"
+                        >
+                        </app-default-autocomplete>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="phone1">Telefono</label>
+                        <input
+                            pInputText
+                            id="phone1"
+                            type="text"
+                            formControlName="phone"
+                            ngModel
+                        />
+                    </div>
+
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="email1">Email</label>
+                        <input
+                            pInputText
+                            id="email1"
+                            type="text"
+                            formControlName="email"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="pec1">PEC</label>
+                        <input
+                            pInputText
+                            id="pec1"
+                            type="text"
+                            formControlName="pec"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="website1">Sito web</label>
+                        <input
+                            pInputText
+                            id="website1"
+                            type="text"
+                            formControlName="website"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="user1">Rappresentante legale</label>
+                        <p-dropdown
+                            [options]="ceosItems"
+                            optionLabel="fullName"
+                            optionValue="id"
+                            [showClear]="true"
+                            formControlName="ceoId"
+                            [(ngModel)]="selectedCeo"
+                        ></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="status1">Attiva/Disattiva</label> <br />
+                        <p-inputSwitch formControlName="status"></p-inputSwitch>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="description1">Descrizione</label>
+
+                        <textarea
+                            rows="5"
+                            cols="30"
+                            ngModel
+                            formControlName="description"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                </div>
+                <div
+                    class="flex justify-content-center align-items-center gap-2"
+                ></div>
+               
+            </form>
+        </div>
+    </div>
+</div>

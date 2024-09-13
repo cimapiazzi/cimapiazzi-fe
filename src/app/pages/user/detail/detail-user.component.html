@@ -1,0 +1,165 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+        <div class="card">
+            <form [formGroup]="detailForm" #form="ngForm">
+                <h5>Dettaglio utente</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="name1">Name</label>
+                        <input
+                            pInputText
+                            id="name1"
+                            type="text"
+                            formControlName="name"
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="surname1">Cognome</label>
+                        <input
+                            pInputText
+                            id="surname1"
+                            type="text"
+                            formControlName="surname"
+                        />
+                    </div>
+
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="email1">Email</label>
+                        <input
+                            pInputText
+                            id="email1"
+                            type="text"
+                            formControlName="email"
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="fiscalCode1">Codice Fiscale</label>
+                        <input
+                            pInputText
+                            id="fiscalCode1"
+                            type="text"
+                            placeholder="CodiceFiscale"
+                            formControlName="fiscalCode"
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="user1">Ruolo</label>
+                        <p-dropdown
+                            [options]="roles"
+                            optionLabel="label"
+                            optionValue="id"
+                            placeholder="Seleziona un ruolo"
+                            [showClear]="true"
+                            formControlName="roleId"
+                            [(ngModel)]="selectedRole"
+                        ></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="iban1">Indirizzo</label>
+                        <app-default-autocomplete
+                            id="address1"
+                            type="text"
+                            controlName="address"
+                            [defaultAutocompleteForm]="detailForm"
+                        >
+                        </app-default-autocomplete>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="country1">Paese</label>
+                        <p-dropdown
+                            [options]="countryItems"
+                            optionLabel="name"
+                            optionValue="name"
+                            formControlName="birthCountry"
+                            placeholder="Seleziona paese"
+                            [required]="true"
+                        >
+                            <ng-template let-country pTemplate="country">
+                                {{ country.name }}
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="birthDate1">Data di nascita</label>
+                        <input
+                            pInputText
+                            id="birthDate1"
+                            type="date"
+                            formControlName="birthDate"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="iban1">IBAN</label>
+                        <input
+                            pInputText
+                            id="iban1"
+                            type="text"
+                            placeholder="IBAN"
+                            formControlName="iban"
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="user1">Azienda</label>
+                        <p-dropdown
+                            [options]="companies"
+                            optionLabel="name"
+                            optionValue="id"
+                            placeholder="Seleziona un azienda"
+                            [showClear]="true"
+                            formControlName="companyId"
+                            [(ngModel)]="selectedCompany"
+                        ></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="workerNumber1">Numero lavoratore</label>
+                        <input
+                            pInputText
+                            id="workerNumber1"
+                            type="text"
+                            placeholder="Numero lavoratore"
+                            formControlName="workerNumber"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="associatedClient1">Cliente associato</label>
+                        <input
+                            pInputText
+                            id="associatedClient1"
+                            type="text"
+                            placeholder="Cliente associato"
+                            formControlName="associatedClient"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="position1">Posizione</label>
+                        <input
+                            pInputText
+                            id="position1"
+                            type="text"
+                            placeholder="Posizione"
+                            formControlName="position"
+                            ngModel
+                        />
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label htmlFor="status1">Attiva/Disattiva</label> <br />
+                        <p-inputSwitch formControlName="status"></p-inputSwitch>
+                    </div>
+                </div>
+                <div
+                    class="flex justify-content-center align-items-center gap-2"
+                ></div>
+            </form>
+            <button
+                pButton
+                pRipple
+                label="Crea documento docx"
+                class="w-full p-3 text-xl"
+                (click)="generateUserDocx()"
+            ></button>
+        </div>
+    </div>
+</div>
