@@ -19,7 +19,7 @@ export class AppMenuComponent implements OnInit {
         public router: Router,
         public layoutService: LayoutService,
         private translateService: TranslateService,
-    ) {}
+    ) { }
 
     userSectionTitle;
     isProduction: any;
@@ -43,18 +43,18 @@ export class AppMenuComponent implements OnInit {
                     },
                 ],
             });
-            this.model.push({
-                label: 'Notification',
-                translationCode: 'menu.routes.notification.menuTitle',
-                items: [
-                    {
-                        label: 'Notification',
-                        translationCode: 'menu.routes.notification.menuTitle',
-                        icon: 'pi pi-fw pi-send',
-                        routerLink: [ROUTES.ROUTE_NOTIFICATION],
-                    },
-                ],
-            });
+            // this.model.push({
+            //     label: 'Notification',
+            //     translationCode: 'menu.routes.notification.menuTitle',
+            //     items: [
+            //         {
+            //             label: 'Notification',
+            //             translationCode: 'menu.routes.notification.menuTitle',
+            //             icon: 'pi pi-fw pi-send',
+            //             routerLink: [ROUTES.ROUTE_NOTIFICATION],
+            //         },
+            //     ],
+            // });
             this.model.push({
                 label: 'Attendances',
                 translationCode: 'menu.routes.attendance.menuTitle',
@@ -158,30 +158,30 @@ export class AppMenuComponent implements OnInit {
             userRoles.includes('ROLE_MODERATOR') ||
             userRoles.includes('ROLE_ACCOUNTING')
         ) {
-            this.model.push({
-                label: 'Deadlines',
-                translationCode: 'menu.routes.deadlines.menuTitle',
-                items: [
-                    {
-                        label: 'Deadlines list',
-                        translationCode: 'menu.routes.deadlines.table',
-                        icon: 'pi pi-list',
-                        routerLink: [ROUTES.ROUTE_TABLE_DEADLINES],
-                    },
-                ],
-            });
-            this.model.push({
-                label: 'Workforce',
-                translationCode: 'menu.routes.workforce.menuTitle',
-                items: [
-                    {
-                        label: 'Workforce list',
-                        translationCode: 'menu.routes.workforce.table',
-                        icon: 'pi pi-calendar',
-                        routerLink: [ROUTES.ROUTE_TABLE_WORKFORCE],
-                    },
-                ],
-            });
+            // this.model.push({
+            //     label: 'Deadlines',
+            //     translationCode: 'menu.routes.deadlines.menuTitle',
+            //     items: [
+            //         {
+            //             label: 'Deadlines list',
+            //             translationCode: 'menu.routes.deadlines.table',
+            //             icon: 'pi pi-list',
+            //             routerLink: [ROUTES.ROUTE_TABLE_DEADLINES],
+            //         },
+            //     ],
+            // });
+            // this.model.push({
+            //     label: 'Workforce',
+            //     translationCode: 'menu.routes.workforce.menuTitle',
+            //     items: [
+            //         {
+            //             label: 'Workforce list',
+            //             translationCode: 'menu.routes.workforce.table',
+            //             icon: 'pi pi-calendar',
+            //             routerLink: [ROUTES.ROUTE_TABLE_WORKFORCE],
+            //         },
+            //     ],
+            // });
         }
 
         if (
