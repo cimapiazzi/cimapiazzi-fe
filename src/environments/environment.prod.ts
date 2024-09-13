@@ -5,7 +5,7 @@ export const environment = {
     spacesEndpoint: 'fra1.digitaloceanspaces.com',
     accessKeyId: 'DO003RNZ7LBYBUFYZN3Z',
     secretAccessKey: 'G9lWYNPj24SgTQjxvAf51TkAItFdUuRrVdtYDHT4vm0',
-    bucketName: 'cimapiazzi.images',
+    bucketName: 'cimapiazzi',
     adminEmails: [
         'avila@cimapiazzi.com',
     ],
