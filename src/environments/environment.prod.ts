@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    endpoint: 'https://cimapiazzi-node-js.onrender.com/',
+    endpoint: 'https://cimapiazzi-be.onrender.com',
     googleMapsApiKey: 'AIzaSyDojCnBqxEPLG3s476r6id2WLGHKalECn4S',
     spacesEndpoint: 'fra1.digitaloceanspaces.com',
     accessKeyId: 'DO00R74W2WNVTG49WKFUS',
