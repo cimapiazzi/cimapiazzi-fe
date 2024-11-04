@@ -6,7 +6,7 @@ export const environment = {
     accessKeyId: 'DO003RNZ7LBYBUFYZN3Z',
     secretAccessKey: 'G9lWYNPj24SgTQjxvAf51TkAItFdUuRrVdtYDHT4vm0',
     bucketName: 'cimapiazzi',
-    adminEmails: ['cimapiazzisviluppo@gmail.com'],
+    adminEmails: ['cimapiazzisviluppo@gmail.com', 'cimapiazziservizi@gmail.com'],
     operatorPhoneNumber: '+393883217085', //Operator Help desk
 };
 
