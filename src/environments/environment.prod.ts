@@ -8,6 +8,7 @@ export const environment = {
     bucketName: 'cimapiazzi',
     adminEmails: [
         'cimapiazzisviluppo@gmail.com',
+        'cimapiazziservizi@gmail.com'
     ],
-    operatorPhoneNumber: '+393891733185', //Operator Help desk
+    operatorPhoneNumber: '+393883217085', //Operator Help desk
 };
