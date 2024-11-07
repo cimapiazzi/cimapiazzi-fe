@@ -103,7 +103,7 @@ export class PlacesCompanyComponent implements OnInit {
         companyId: ['', [Validators.required]],
     });
 
-    selectAddress(place: any): void {}
+    selectAddress(place: any): void { }
 
     ngOnInit() {
         this.loadServices();
@@ -181,6 +181,35 @@ export class PlacesCompanyComponent implements OnInit {
             (event.target as HTMLInputElement).value,
             'contains'
         );
+    }
+
+    deletePlace(placeId: string) {
+        console.log("detele place")
+        this.confirmationService.confirm({
+            message: 'Sei sicuro di eliminare questa place?',
+            header: 'Conferma cancellazione',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.placeService.deletePlaceById(placeId).subscribe({
+                    next: () => {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Place deleted successfully',
+                        });
+                        // Reload the places
+                        this.loadServices();
+                    },
+                    error: (err) => {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Could not delete place',
+                        });
+                    },
+                });
+            }
+        });
     }
 
     clear(table: Table) {

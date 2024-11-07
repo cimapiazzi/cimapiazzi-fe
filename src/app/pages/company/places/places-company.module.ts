@@ -21,6 +21,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MenuModule } from 'primeng/menu';
 import { GoogleMapsDemoModule } from 'src/app/shared/components/google-map/google-maps.module';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { GoogleMapsDemoModule } from 'src/app/shared/components/google-map/googl
         GoogleMapsDemoModule,
         DialogModule,
         ConfirmDialogModule,
+        ConfirmPopupModule,
         TableModule,
         RatingModule,
         ButtonModule,
@@ -48,5 +50,7 @@ import { GoogleMapsDemoModule } from 'src/app/shared/components/google-map/googl
         ToastModule,
     ],
     declarations: [PlacesCompanyComponent],
+    providers: [MessageService]
+
 })
 export class PlacesCompanyModule {}

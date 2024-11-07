@@ -45,4 +45,7 @@ export class PlaceService {
             httpOptions
         );
     }
+    deletePlaceById(id: string): Observable<any> {
+        return this.http.delete(API_URL + 'deletePlace/' + id, httpOptions);
+    }
 }
