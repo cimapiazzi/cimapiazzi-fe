@@ -5,103 +5,54 @@
             <form [formGroup]="documentsForm" #form="ngForm">
                 <div class="p-fluid p-formgrid grid">
                     <div class="field col-12 md:col-4">
-                        <label htmlFor="category1"
-                            >Seleziona categoria documento/documenti</label
-                        >
-                        <p-dropdown
-                            placeholder="-Seleziona-"
-                            [options]="categoriesItems"
-                            optionLabel="name"
-                            formControlName="category"
-                            [(ngModel)]="selectedCategory"
-                            (onChange)="onChangeCategoryDocument()"
-                        ></p-dropdown>
+                        <label htmlFor="category1">Seleziona categoria documento/documenti</label>
+                        <p-dropdown placeholder="-Seleziona-" [options]="categoriesItems" optionLabel="name"
+                            formControlName="category" [(ngModel)]="selectedCategory"
+                            (onChange)="onChangeCategoryDocument()"></p-dropdown>
                     </div>
-                    <div
-                        class="field col-12 md:col-4"
-                        *ngIf="
+                    <div class="field col-12 md:col-4" *ngIf="
                             selectedCategory?.id &&
                             selectedCategory?.id === 'cedolino'
-                        "
-                    >
+                        ">
                         <label htmlFor="releaseMonth1">Aggiungi mese</label>
-                        <p-dropdown
-                            placeholder="-Seleziona-"
-                            [options]="monthsItems"
-                            optionLabel="name"
-                            formControlName="releaseMonth"
-                            [(ngModel)]="selectedReleaseMonth"
-                        ></p-dropdown>
+                        <p-dropdown placeholder="-Seleziona-" [options]="monthsItems" optionLabel="name"
+                            formControlName="releaseMonth" [(ngModel)]="selectedReleaseMonth"></p-dropdown>
                     </div>
-                    <div
-                        class="field col-12 md:col-4"
-                        *ngIf="
+                    <div class="field col-12 md:col-4" *ngIf="
                             selectedCategory?.id &&
                             (selectedCategory?.id === 'cud' ||
                                 selectedCategory?.id === 'cedolino')
-                        "
-                    >
+                        ">
                         <label htmlFor="releaseYear1">Aggiungi anno</label>
-                        <p-dropdown
-                            placeholder="-Seleziona-"
-                            [options]="yearsItems"
-                            optionLabel="name"
-                            formControlName="releaseYear"
-                            [(ngModel)]="selectedReleaseYear"
-                        ></p-dropdown>
+                        <p-dropdown placeholder="-Seleziona-" [options]="yearsItems" optionLabel="name"
+                            formControlName="releaseYear" [(ngModel)]="selectedReleaseYear"></p-dropdown>
                     </div>
-                    <div
-                        class="field col-12 md:col-4"
-                        *ngIf="
+                    <div class="field col-12 md:col-4" *ngIf="
                             selectedCategory?.id &&
                             !(
                                 selectedCategory?.id === 'cud' ||
                                 selectedCategory?.id === 'cedolino'
                             )
-                        "
-                    >
-                        <label htmlFor="expireDate1"
-                            >Aggiungi data di scadenza</label
-                        >
-                        <p-calendar
-                            formControlName="expireDate"
-                            placeholder="Seleziona data"
-                        ></p-calendar>
+                        ">
+                        <label htmlFor="expireDate1">Aggiungi data di scadenza</label>
+                        <p-calendar formControlName="expireDate" placeholder="Seleziona data"></p-calendar>
                     </div>
                 </div>
                 <div class="p-formgrid grid">
                     <div class="field col">
-                        <p-fileUpload
-                            #fileUpload
-                            [customUpload]="true"
-                            name="files[]"
-                            (onSelect)="uploadFiles($event)"
-                            [showUploadButton]="false"
-                            [multiple]="false"
-                            [maxFileSize]="500000000"
-                            label="Seleziona"
-                        >
+                        <p-fileUpload #fileUpload [customUpload]="true" name="files[]" (onSelect)="uploadFiles($event)"
+                            [showUploadButton]="false" [multiple]="false" [maxFileSize]="500000000" label="Seleziona">
                         </p-fileUpload>
                     </div>
                 </div>
-                <div
-                    class="flex justify-content-center align-items-center gap-2"
-                >
-                    <button
-                        pButton
-                        pRipple
-                        type="submit"
-                        class="p-button-success"
-                        label="Aggiungi documento"
-                        icon="pi pi-plus"
-                        [disabled]="
+                <div class="flex justify-content-center align-items-center gap-2">
+                    <button pButton pRipple type="submit" class="p-button-success" label="Aggiungi documento"
+                        icon="pi pi-plus" [disabled]="
                             !(
                                 documentsForm.valid &&
                                 this.uploadedFiles.length > 0
                             )
-                        "
-                        (click)="saveDocument()"
-                    ></button>
+                        " (click)="saveDocument()"></button>
                 </div>
             </form>
         </div>
@@ -111,36 +62,24 @@
         <div class="card">
             <p-panel header="Cedolini" [toggleable]="true">
                 <div class="document-list">
-                    <ng-container
-                        *ngFor="let file of this.filesCedoliniDocument"
-                    >
+                    <ng-container *ngFor="let file of this.filesCedoliniDocument">
                         <div class="file-wrapper">
                             <div class="close-wrapper">
-                                <button
-                                    pButton
-                                    pRipple
-                                    icon="pi pi-times"
-                                    class="p-button-text"
-                                    (click)="deleteDocument(file?.keyFile)"
-                                ></button>
+                                <button pButton pRipple icon="pi pi-times" class="p-button-text"
+                                    (click)="deleteDocument(file?.keyFile)"></button>
                             </div>
                             <div class="category">{{ file.category }}</div>
                             <div>
-                                <img
-                                    src="assets/icons/{{ file.category }}.png"
-                                    class="w-3rem h-3rem"
-                                    alt="Ferie"
-                                />
+                                <img src="assets/icons/{{ file.category }}.png" class="w-3rem h-3rem" alt="Ferie" />
                             </div>
                             <div>
-                                <strong
-                                    >{{ file.releaseMonth | titlecase }}
+                                <strong>{{ file.releaseMonth | titlecase }}
                                     {{ file.releaseYear }}
                                 </strong>
                             </div>
                             <div>
                                 {{
-                                    file.createdAt | date: "EEEE, MMMM dd, yyyy"
+                                file.createdAt | date: "EEEE, MMMM dd, yyyy"
                                 }}
                             </div>
                             <div class="file-name">
@@ -152,10 +91,7 @@
                                 .{{ getFileExtension(file?.keyFile) }}
                             </div>
 
-                            <a
-                                class="link"
-                                href="{{ getFileUrl(file?.keyFile) }}"
-                            >
+                            <a class="link" href="{{ getFileUrl(file?.keyFile) }}">
                             </a>
                         </div>
                     </ng-container>
@@ -168,21 +104,12 @@
                     <ng-container *ngFor="let file of this.filesCUDDocument">
                         <div class="file-wrapper">
                             <div class="close-wrapper">
-                                <button
-                                    pButton
-                                    pRipple
-                                    icon="pi pi-times"
-                                    class="p-button-text"
-                                    (click)="deleteDocument(file?.keyFile)"
-                                ></button>
+                                <button pButton pRipple icon="pi pi-times" class="p-button-text"
+                                    (click)="deleteDocument(file?.keyFile)"></button>
                             </div>
                             <div class="category">{{ file.category }}</div>
                             <div>
-                                <img
-                                    src="assets/icons/{{ file.category }}.png"
-                                    class="w-3rem h-3rem"
-                                    alt="Ferie"
-                                />
+                                <img src="assets/icons/{{ file.category }}.png" class="w-3rem h-3rem" alt="Ferie" />
                             </div>
                             <div>
                                 <strong>
@@ -191,7 +118,7 @@
                             </div>
                             <div>
                                 {{
-                                    file.createdAt | date: "EEEE, MMMM dd, yyyy"
+                                file.createdAt | date: "EEEE, MMMM dd, yyyy"
                                 }}
                             </div>
                             <div class="file-name">
@@ -203,10 +130,7 @@
                                 .{{ getFileExtension(file?.keyFile) }}
                             </div>
 
-                            <a
-                                class="link"
-                                href="{{ getFileUrl(file?.keyFile) }}"
-                            >
+                            <a class="link" href="{{ getFileUrl(file?.keyFile) }}">
                             </a>
                         </div>
                     </ng-container>
@@ -219,31 +143,21 @@
                     <ng-container *ngFor="let file of this.files">
                         <div class="file-wrapper">
                             <div class="close-wrapper">
-                                <button
-                                    pButton
-                                    pRipple
-                                    icon="pi pi-times"
-                                    class="p-button-text"
-                                    (click)="deleteDocument(file?.keyFile)"
-                                ></button>
+                                <button pButton pRipple icon="pi pi-times" class="p-button-text"
+                                    (click)="deleteDocument(file?.keyFile)"></button>
                             </div>
                             <div class="category">{{ file.category }}</div>
                             <div>
-                                <img
-                                    src="assets/icons/{{ file.category }}.png"
-                                    class="w-3rem h-3rem"
-                                    alt="Ferie"
-                                />
+                                <img src="assets/icons/{{ file.category }}.png" class="w-3rem h-3rem" alt="Ferie" />
                             </div>
                             <div>
-                                <strong
-                                    >{{ file.releaseMonth | titlecase }}
+                                <strong>{{ file.releaseMonth | titlecase }}
                                     {{ file.releaseYear }}
                                 </strong>
                             </div>
                             <div>
                                 {{
-                                    file.createdAt | date: "EEEE, MMMM dd, yyyy"
+                                file.createdAt | date: "EEEE, MMMM dd, yyyy"
                                 }}
                             </div>
                             <div class="file-name">
@@ -255,10 +169,7 @@
                                 .{{ getFileExtension(file?.keyFile) }}
                             </div>
 
-                            <a
-                                class="link"
-                                href="{{ getFileUrl(file?.keyFile) }}"
-                            >
+                            <a class="link" href="{{ getFileUrl(file?.keyFile) }}">
                             </a>
                         </div>
                     </ng-container>

@@ -35,6 +35,7 @@ export class DocumentsHomeComponent {
             name: 'Documenti Identità',
             id: 'documento-identita',
         },
+       
         {
             name: 'Patente',
             id: 'patente',
@@ -50,6 +51,10 @@ export class DocumentsHomeComponent {
         {
             name: 'Contratto lavoro',
             id: 'contratto-lavoro',
+        },
+        {
+            name: 'Lettera di richiamo',
+            id: 'lettera-richiamo',
         },
         {
             name: 'Altro',

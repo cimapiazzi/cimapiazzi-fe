@@ -8,6 +8,8 @@ import { SpacesService } from 'src/app/services/spaces.service';
 import { UploadService } from 'src/app/services/upload.service';
 import * as moment from 'moment';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { UserService } from 'src/app/services/user.service';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
     selector: 'app-documents-user',
@@ -53,6 +55,10 @@ export class DocumentsUserComponent {
             id: 'contratto-lavoro',
         },
         {
+            name: 'Lettera di richiamo',
+            id: 'lettera-richiamo',
+        },
+        {
             name: 'Altro',
             id: 'altro',
         },
@@ -75,10 +81,13 @@ export class DocumentsUserComponent {
     subscription: Subscription;
     currentFiscalCode: any;
     currentUserId: any;
+    currentUser: any;
     constructor(
         public fb: FormBuilder,
         private route: ActivatedRoute,
         private uploadService: UploadService,
+        private userService: UserService,
+        private emailService: EmailService,
         public translateService: TranslateService,
         private downloadService: DownloadService,
         private spacesService: SpacesService,
@@ -98,6 +107,15 @@ export class DocumentsUserComponent {
     }
 
     loadServices(idUser, fiscalCode) {
+        const userServiceSubscription = this.userService
+            .getUser(idUser)
+            .subscribe((data) => {
+                this.currentUser = data;
+            });
+
+        if (userServiceSubscription && this.subscription)
+            this.subscription.add(userServiceSubscription);
+
         moment.locale(this.locale);
         const downloadServiceSubscription = this.downloadService
             .getDocumentsByUser(idUser, fiscalCode)
@@ -110,13 +128,13 @@ export class DocumentsUserComponent {
             .subscribe((files) => {
                 this.filesCedoliniDocument = files;
             });
-        
+
         const downloadCUDDocumentServiceSubscription = this.downloadService
             .getCUDDocumentsByUser(idUser, fiscalCode)
             .subscribe((files) => {
                 this.filesCUDDocument = files;
             });
-        
+
         const translateServiceSubscription =
             this.translateService.onLangChange.subscribe(
                 (langChangeEvent: LangChangeEvent) => {
@@ -128,8 +146,8 @@ export class DocumentsUserComponent {
             this.subscription.add(downloadServiceSubscription);
         if (downloadCedoliniDocumentServiceSubscription && this.subscription)
             this.subscription.add(downloadCedoliniDocumentServiceSubscription);
-         if (downloadCUDDocumentServiceSubscription && this.subscription)
-             this.subscription.add(downloadCUDDocumentServiceSubscription);
+        if (downloadCUDDocumentServiceSubscription && this.subscription)
+            this.subscription.add(downloadCUDDocumentServiceSubscription);
         if (translateServiceSubscription && this.subscription)
             this.subscription.add(translateServiceSubscription);
     }
@@ -209,9 +227,42 @@ export class DocumentsUserComponent {
 
         this.uploadService.uploadDocuments(formData).subscribe(
             (response) => {
+                if (this.currentUser && this.currentUser?.email) {
+                    let messageEmail = '';
+                    const today = moment().format('DD/MM/YYYY');
+                    messageEmail +=
+                        'Ciao ' +
+                        this.currentUser?.name +
+                        ' ' +
+                        this.currentUser?.surname +
+                        ',<br>';
+                    messageEmail +=
+                        "E' stato aggiunto un documento (" +
+                        (this.selectedCategory?.name || category) +
+                        ") al tuo profilo in data " +
+                        today +
+                        '.<br>';
+
+                    this.emailService
+                        .sendEmail(
+                            this.currentUser?.email,
+                            'CIMAPIAZZI - Documento  - ' +
+                            this.currentUser?.name +
+                            ' ' +
+                            this.currentUser?.surname,
+                            messageEmail,
+                        )
+                        .subscribe(
+                            (risposta) =>
+                                console.log('Email inviata con successo:', risposta),
+                            (errore) =>
+                                console.error("Errore durante l'invio dell'email:", errore),
+                        );
+                }
+
                 this.loadServices(userId, fiscalCode);
             },
-            (error) => {},
+            (error) => { },
         );
     }
 
@@ -230,7 +281,7 @@ export class DocumentsUserComponent {
             (response) => {
                 this.loadServices(this.currentUserId, this.currentFiscalCode);
             },
-            (error) => {},
+            (error) => { },
         );
     }
 }
